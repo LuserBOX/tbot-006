@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 background_color = '#bebebe'
 symbol = 'BTCUSDT'
 interval = '1d'
-limit = 900
+limit = 400
 ema_length = 200
 
 # ПОДКЛЮЧЕНИЕ К БИНАНСУ
@@ -51,41 +51,43 @@ klines = fn_get_binance_klines(symbol = symbol, interval = interval, limit = lim
 # Вывод результатов запроса от Бинанс
 print('Binance_klines: \n', klines)
 # Создаем новый столбец и добавлячем в него расчитываемые значения EMA200
-klines['EMA200'] = ta.ema(klines['Close'], length = ema_length, offset=None)
+klines['EMA'] = ta.ema(klines['Close'], length = ema_length, offset=None)
 # Удаляем все строки, где EMA200 == NaN (это первые 200 значений, на основании которых и расчитывается кривая)
 drop_klines = klines.dropna()
 # Меняемся значениями
 drop_klines, klines = klines, drop_klines
 # Печатаем весь DataFrame
-print('EMA200:\n', klines)
+print('EMA:\n', klines)
 
 # Вариант 1
-# Расчитываем производную от EMA200
-Trend = np.diff(klines['EMA200'])
+# Расчитываем производную от EMA
+Trend = np.diff(klines['EMA'])
 print('np.Trend:\n', Trend)
 
 # Вариант 2. Расчитиваем разницу между соседними значениями прямо в DataFrame
-klines.loc[:,['EMA200_DIFF']] = klines['EMA200'].diff()
-print('df.EMA200_DIFF:\n', klines['EMA200_DIFF'])
+klines.loc[:,['EMA_DIFF']] = klines['EMA'].diff()
+print('df.EMA_DIFF:\n', klines['EMA_DIFF'])
 
 # Печать двух графиков с установкой разных сеток
 fig = plt.figure(figsize=(12, 6))
 ax = fig.add_subplot(211)
 ax2 = fig.add_subplot(212)
-ax.set_title('График 1: {}'.format('BNB/USDT+EMA200'), fontsize=10)
+ax.set_title('График 1: {}'.format('XXX/USDT+EMA'), fontsize=10)
 ax.plot(klines['Close'], color='blue')
-ax.plot(klines['EMA200'], color='#c0c0c0')
+ax.plot(klines['EMA'], color='#c0c0c0')
 ax.grid(True)
+
 
 # Устанавливаем размер шрифта меток на осях
 ax.tick_params(axis='y', labelsize=8)
 ax.tick_params(axis='x', labelsize=8)
-ax.set_yticks(np.arange(0, max(klines['Close']), 25))
+ax.set_yticks(np.arange(0, max(klines['Close']), 125))
 
-#ax2.plot(Trend, color='orange')
-ax2.plot(klines['EMA200_DIFF'], color='orange')
+# Формирование второго графика
+ax2.plot(Trend, color='orange')
+#ax2.plot(klines['EMA_DIFF'], color='orange')
 
-ax2.set_title('График 2: {}'.format('BNB/USDT+Производная(Разница соседних значений EMA200)'), fontsize=10)
+ax2.set_title('График 2: {}'.format('BNB/USDT+Производная(Разница соседних значений EMA)'), fontsize=10)
 # Устанавливаем размер шрифта меток на осях
 ax2.tick_params(axis='y', labelsize=8)
 ax2.tick_params(axis='x', labelsize=8)
@@ -100,10 +102,10 @@ plt.show()
 fig = plt.figure(figsize=(12, 6))
 ax = fig.add_subplot(211)
 ax2 = fig.add_subplot(212)
-ax.set_title('График 1: {}'.format('BNB/USDT+EMA200'), fontsize=10)
+ax.set_title('График 1: {}'.format('BNB/USDT+EMA'), fontsize=10)
 
 ax.plot(klines['Close'], color='blue')
-ax.plot(klines['EMA200'], color='orange')
+ax.plot(klines['EMA'], color='orange')
 
 ax.grid(True)
 
@@ -113,15 +115,15 @@ ax.tick_params(axis='x', labelsize=8)
 ax.set_yticks(np.arange(0, max(klines['Close']), 25))
 
 ax2.plot(klines['Close'], color='blue')
-ax2.plot(klines['EMA200'], color='orange')
-ax2.set_title('График 2: {}'.format('BNB/USDT+EMA200'), fontsize=10)
+ax2.plot(klines['EMA'], color='orange')
+ax2.set_title('График 2: {}'.format('BNB/USDT+EMA'), fontsize=10)
 # Устанавливаем размер шрифта меток на осях
 ax2.tick_params(axis='y', labelsize=8)
 ax2.tick_params(axis='x', labelsize=8)
 # ШАГ по Y
 ax2.set_yticks(np.arange(0, max(klines['Close']), 50))
 # Заливаем зеленым- если график НАД графиком EMA200 и КРАСНЫМ, если график НАД EMA200
-ax2.fill_between(klines.index, klines['EMA200'], klines['Close'], where=klines['Close'] >= klines['EMA200'], color='g')
-ax2.fill_between(klines.index, klines['EMA200'], klines['Close'], where=klines['Close'] <= klines['EMA200'], color='r')
+ax2.fill_between(klines.index, klines['EMA'], klines['Close'], where=klines['Close'] >= klines['EMA'], color='g')
+ax2.fill_between(klines.index, klines['EMA'], klines['Close'], where=klines['Close'] <= klines['EMA'], color='r')
 #ax2.grid(True)
 plt.show()
