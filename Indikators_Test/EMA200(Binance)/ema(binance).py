@@ -13,13 +13,16 @@ from time import sleep
 from binance.exceptions import BinanceAPIException
 import keys
 import matplotlib.pyplot as plt
+from matplotlib.ticker import AutoMinorLocator, FixedLocator
+
 
 # ОПРЕДЕЛЯЕМ ПЕРЕМЕННЫЕ
 background_color = '#bebebe'
 symbol = 'BTCUSDT'
 interval = '1d'
-limit = 400
-ema_length = 200
+limit = 100
+ema_length = 20
+ema_color = 'red'
 
 # ПОДКЛЮЧЕНИЕ К БИНАНСУ
 client = Client(api_key=keys.api_key, api_secret=keys.api_secret)
@@ -69,19 +72,26 @@ klines.loc[:,['EMA_DIFF']] = klines['EMA'].diff()
 print('df.EMA_DIFF:\n', klines['EMA_DIFF'])
 
 # Печать двух графиков с установкой разных сеток
-fig = plt.figure(figsize=(12, 6))
+fig = plt.figure(figsize = (12, 6))
+
 ax = fig.add_subplot(211)
 ax2 = fig.add_subplot(212)
+
 ax.set_title('График 1: {}'.format('XXX/USDT+EMA'), fontsize=10)
-ax.plot(klines['Close'], color='blue')
-ax.plot(klines['EMA'], color='#c0c0c0')
+ax.plot(klines['Close'], color = 'blue')
+ax.plot(klines['EMA'], color = ema_color)
+
 ax.grid(True)
+# Enabling both grids:
 
 
 # Устанавливаем размер шрифта меток на осях
-ax.tick_params(axis='y', labelsize=8)
-ax.tick_params(axis='x', labelsize=8)
-ax.set_yticks(np.arange(0, max(klines['Close']), 125))
+ax.tick_params(axis='y', labelsize=6)
+ax.tick_params(axis='x', labelsize=6)
+
+ax.set_yticks(np.arange(0, max(klines['Close']), 25))
+
+
 
 # Формирование второго графика
 ax2.plot(Trend, color='orange')
@@ -92,6 +102,8 @@ ax2.set_title('График 2: {}'.format('BNB/USDT+Производная(Ра�
 ax2.tick_params(axis='y', labelsize=8)
 ax2.tick_params(axis='x', labelsize=8)
 ax2.grid(True)
+
+
 plt.show()
 
 
