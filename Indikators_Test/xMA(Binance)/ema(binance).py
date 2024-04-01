@@ -28,7 +28,7 @@ ema_color = 'red'
 client = Client(api_key=keys.api_key, api_secret=keys.api_secret)
 
 # Функция (С ЗАЩИТОЙ) получения массива информации для свечей с биржи Бинанс.
-# Возвращает таблицу, которую уже можно анализировать
+# Возвращает таблицу (Dataframe), которую уже можно анализировать
 def fn_get_binance_klines(symbol, interval, limit):
     try:
         df = pd.DataFrame(client.get_historical_klines(symbol = symbol, interval = interval, limit = limit))
@@ -53,7 +53,7 @@ def fn_get_binance_klines(symbol, interval, limit):
 klines = fn_get_binance_klines(symbol = symbol, interval = interval, limit = limit)
 # Вывод результатов запроса от Бинанс
 print('Binance_klines: \n', klines)
-# Создаем новый столбец и добавлячем в него расчитываемые значения EMA200
+# Создаем новый столбец и добавлячем в него расчитываемые значения EMA
 klines['EMA'] = ta.ema(klines['Close'], length = ema_length, offset=None)
 # Удаляем все строки, где EMA200 == NaN (это первые 200 значений, на основании которых и расчитывается кривая)
 drop_klines = klines.dropna()
