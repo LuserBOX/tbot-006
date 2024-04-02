@@ -75,45 +75,53 @@ Trend = np.diff(klines['EMA'])
 print('np.Trend:\n', Trend)
 
 # Вариант 2. Расчитиваем разницу между соседними значениями прямо в DataFrame
+# ПРАВИЛЬНОЕ РЕШЕНИЕ, Так ак остаются валидными ДАТЫ!!!
 klines.loc[:,['EMA_DIFF']] = klines['EMA'].diff()
+
 print('df.EMA_DIFF:\n', klines['EMA_DIFF'])
+
+# Черная тема
+plt.style.use('dark_background')
 
 # Печать двух графиков с установкой разных сеток
 fig = plt.figure(figsize = (18, 13))
+
+#fig = plt.figure(dpi = 10)
 
 ax1 = fig.add_subplot(311)
 ax2 = fig.add_subplot(312)
 ax3 = fig.add_subplot(313)
 
-# ФРПМИПУЕМ ПЕПРВЫЙ ГРАФИК
+# ====== ФОПМИПУЕМ ПЕПРВЫЙ ГРАФИК
 ax1.set_title('График 1: {title}'.format(title= symbol+ ' log style'), fontsize=10)
 ax1.plot(klines['Close'], color = 'blue')
-ax1.plot(klines['SMA'], color = sma_color, label= 'SMA '+ str(sma_length))
-ax1.plot(klines['EMA'], color = ema_color, label= 'EMA '+ str(ema_length))
-ax1.plot(klines['WMA'], color = wma_color, label= 'WMA '+ str(wma_length))
+ax1.plot(klines['SMA'],linewidth= 1, color = sma_color, label= 'SMA '+ str(sma_length))
+ax1.plot(klines['EMA'], linewidth= 1, color = ema_color, label= 'EMA '+ str(ema_length))
+ax1.plot(klines['WMA'], linewidth= 1, color = wma_color, label= 'WMA '+ str(wma_length))
 
 # Легенду выводим
 ax1.legend()
+
 # Устанавливаем размер шрифта меток на осях
 ax1.tick_params(axis='y', labelsize=6)
 ax1.tick_params(axis='x', labelsize=6)
 
 # Установить цену деления по шкале Y = grid_price_step (USDT) :
-ax1.set_yticks(np.arange(0, max(klines['Close']), grid_price_step))
+# ax1.set_yticks(np.arange(0, max(klines['Close']), grid_price_step))
 
 # УСТАНАВЛИВАТЬ ПОСДЕДНИМ !!! По оси Y - логарифмическая шкала
 ax1.set_yscale('log')
 
 # Сетку рисуем
-ax1.grid(True)
+#ax1.grid(True)
+ax1.grid(True,which="both",ls="--",c='gray')
 
-# ФОРМИРОВАНИЕ ВТОРОГО ГРАФИКА
+# =====  ФОРМИРОВАНИЕ ВТОРОГО ГРАФИКА
 ax2.set_title('График 1: {title}'.format(title= symbol), fontsize=10)
 ax2.plot(klines['Close'], color = 'blue')
 ax2.plot(klines['SMA'], color = sma_color)
 ax2.plot(klines['EMA'], color = ema_color)
 ax2.plot(klines['WMA'], color = wma_color)
-# По оси Y - логарифмическая шкала
 
 # Устанавливаем размер шрифта меток на осях
 ax2.tick_params(axis='y', labelsize=6)
@@ -129,9 +137,10 @@ ax2.grid(True,which="both",ls="--",c='gray')
 #ax2.grid(True)
 
 
+# =====  ФОРМИРОВАНИЕ ТРЕТЬЕГО ГРАФИКА
+ax3.plot(klines['EMA_DIFF'], color='orange')
 
-# Формирование третьего графика
-ax3.plot(Trend, color='orange')
+#ax3.plot(Trend, color='orange')
 #ax2.plot(klines['EMA_DIFF'], color='orange')
 
 # Ели линия выше 0- тренд возрастающий.
@@ -141,6 +150,14 @@ ax3.tick_params(axis='y', labelsize=8)
 ax3.tick_params(axis='x', labelsize=8)
 ax3.grid(True)
 
+# УСТАНАВЛИВАТЬ ПОСДЕДНИМ !!! По оси Y - логарифмическая шкала
+#ax3.set_yscale('log')
+ax3.set_yscale('symlog', linthresh=1)
+
+# Сетку рисуем
+#ax1.grid(True)
+ax3.grid(True,which="both",ls="--",c='gray')
 
 plt.show()
+
 

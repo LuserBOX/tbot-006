@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="477a8e8e-7f9f-4386-99fe-014d94af1096" name="Changes" comment="31.03.2024 23:55">
-      <change afterPath="$PROJECT_DIR$/Indikators_Test/xMA(Binance)/sma+ema(binance).py" afterDir="false" />
+    <list default="true" id="477a8e8e-7f9f-4386-99fe-014d94af1096" name="Changes" comment="01.04.2024 22:49">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Indikators_Test/EMA200(Binance)/ema(binance).py" beforeDir="false" afterPath="$PROJECT_DIR$/Indikators_Test/xMA(Binance)/ema(binance).py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Indikators_Test/EMA200(Binance)/ema_test(binance).py" beforeDir="false" afterPath="$PROJECT_DIR$/Indikators_Test/xMA(Binance)/ema_test(binance).py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Indikators_Test/xMA(Binance)/sma+ema(binance).py" beforeDir="false" afterPath="$PROJECT_DIR$/Indikators_Test/xMA(Binance)/sma+ema(binance).py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,18 +37,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.ema(binance).executor": "Run",
-    "Python.ema200(binance).executor": "Run",
-    "Python.sma+ema(binance).executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "/home/stalker/PycharmProjects/tbot-006/Indikators_Test/xMA(Binance)",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.ema(binance).executor&quot;: &quot;Run&quot;,
+    &quot;Python.ema200(binance).executor&quot;: &quot;Run&quot;,
+    &quot;Python.sma+ema(binance).executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/stalker/PycharmProjects/tbot-006/Indikators_Test/xMA(Binance)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Indikators_Test/xMA(Binance)" />
@@ -129,7 +127,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711920043054</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="01.04.2024 22:49">
+      <option name="closed" value="true" />
+      <created>1712000971991</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1712000971991</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -147,7 +153,8 @@
     <MESSAGE value="Test" />
     <MESSAGE value="31.03.2024 21:08" />
     <MESSAGE value="31.03.2024 23:55" />
-    <option name="LAST_COMMIT_MESSAGE" value="31.03.2024 23:55" />
+    <MESSAGE value="01.04.2024 22:49" />
+    <option name="LAST_COMMIT_MESSAGE" value="01.04.2024 22:49" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
