@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="477a8e8e-7f9f-4386-99fe-014d94af1096" name="Changes" comment="01.04.2024 22:49">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Indikators_Test/xMA(Binance)/sma+ema(binance).py" beforeDir="false" afterPath="$PROJECT_DIR$/Indikators_Test/xMA(Binance)/sma+ema(binance).py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

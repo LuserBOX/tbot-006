@@ -17,13 +17,13 @@ from matplotlib.ticker import AutoMinorLocator, FixedLocator
 
 # ОПРЕДЕЛЯЕМ ПЕРЕМЕННЫЕ
 background_color = '#bebebe'
-symbol = 'BTCUSDT'
+symbol = 'LTCUSDT'
 interval = '1d'
 grid_price_step = 5000
-limit = 400
-sma_length = 200
-ema_length = 200
-wma_length = 200
+limit = 100
+sma_length = 10
+ema_length = 10
+wma_length = 10
 sma_color = 'yellow'
 ema_color = 'red'
 wma_color = 'green'
@@ -74,11 +74,18 @@ print('EMA:\n', klines)
 Trend = np.diff(klines['EMA'])
 print('np.Trend:\n', Trend)
 
+
+
 # Вариант 2. Расчитиваем разницу между соседними значениями прямо в DataFrame
 # ПРАВИЛЬНОЕ РЕШЕНИЕ, Так ак остаются валидными ДАТЫ!!!
 klines.loc[:,['EMA_DIFF']] = klines['EMA'].diff()
 
+# Определяем разницу между значениями в процентах
+klines.loc[:,['EMA_PCT']] = klines['EMA'].pct_change ()
+
+
 print('df.EMA_DIFF:\n', klines['EMA_DIFF'])
+print('df.EMA_PCT:\n', klines['EMA_PCT'])
 
 # Черная тема
 plt.style.use('dark_background')
@@ -136,10 +143,9 @@ ax2.set_yscale('log')
 ax2.grid(True,which="both",ls="--",c='gray')
 #ax2.grid(True)
 
-
 # =====  ФОРМИРОВАНИЕ ТРЕТЬЕГО ГРАФИКА
-ax3.plot(klines['EMA_DIFF'], color='orange')
-
+#ax3.plot(klines['EMA_DIFF'], color='orange')
+ax3.plot(klines['EMA_PCT'], color='orange')
 #ax3.plot(Trend, color='orange')
 #ax2.plot(klines['EMA_DIFF'], color='orange')
 
@@ -152,7 +158,7 @@ ax3.grid(True)
 
 # УСТАНАВЛИВАТЬ ПОСДЕДНИМ !!! По оси Y - логарифмическая шкала
 #ax3.set_yscale('log')
-ax3.set_yscale('symlog', linthresh=1)
+#ax3.set_yscale('symlog', linthresh=1)
 
 # Сетку рисуем
 #ax1.grid(True)
