@@ -3,7 +3,7 @@
 # - Через неофициальную библиотеку Pyton Binance и его клиента.
 # 2. Расчет индикаторов SMA и EMA
 # 3. Отрисовка графиков с индикаторами
-
+import numpy
 from binance.client import Client
 import pandas as pd
 import pandas_ta as ta
@@ -19,7 +19,8 @@ from matplotlib.ticker import AutoMinorLocator, FixedLocator
 background_color = '#bebebe'
 symbol = 'LTCUSDT'
 interval = '1d'
-grid_price_step = 5000
+grid_y_start = 60
+grid_price_step = 5
 limit = 100
 sma_length = 10
 ema_length = 10
@@ -72,8 +73,10 @@ print('EMA:\n', klines)
 # Вариант 1
 # Расчитываем производную от EMA
 Trend = np.diff(klines['EMA'])
-print('np.Trend:\n', Trend)
 
+T = numpy.gradient(klines['EMA'])
+print('np.Trend:\n', Trend)
+print('np.Trend_1 :\n', T)
 
 
 # Вариант 2. Расчитиваем разницу между соседними значениями прямо в DataFrame
@@ -84,8 +87,9 @@ klines.loc[:,['EMA_DIFF']] = klines['EMA'].diff()
 klines.loc[:,['EMA_PCT']] = klines['EMA'].pct_change ()
 
 
+
 print('df.EMA_DIFF:\n', klines['EMA_DIFF'])
-print('df.EMA_PCT:\n', klines['EMA_PCT'])
+
 
 # Черная тема
 plt.style.use('dark_background')
@@ -100,7 +104,7 @@ ax2 = fig.add_subplot(312)
 ax3 = fig.add_subplot(313)
 
 # ====== ФОПМИПУЕМ ПЕПРВЫЙ ГРАФИК
-ax1.set_title('График 1: {title}'.format(title= symbol+ ' log style'), fontsize=10)
+ax1.set_title('График 1: {title}'.format(title= symbol+ ' LINE style'), fontsize=10)
 ax1.plot(klines['Close'], color = 'blue')
 ax1.plot(klines['SMA'],linewidth= 1, color = sma_color, label= 'SMA '+ str(sma_length))
 ax1.plot(klines['EMA'], linewidth= 1, color = ema_color, label= 'EMA '+ str(ema_length))
@@ -114,21 +118,21 @@ ax1.tick_params(axis='y', labelsize=6)
 ax1.tick_params(axis='x', labelsize=6)
 
 # Установить цену деления по шкале Y = grid_price_step (USDT) :
-# ax1.set_yticks(np.arange(0, max(klines['Close']), grid_price_step))
-
-# УСТАНАВЛИВАТЬ ПОСДЕДНИМ !!! По оси Y - логарифмическая шкала
-ax1.set_yscale('log')
+ax1.set_yticks(np.arange(grid_y_start, max(klines['Close']), grid_price_step))
 
 # Сетку рисуем
 #ax1.grid(True)
 ax1.grid(True,which="both",ls="--",c='gray')
 
 # =====  ФОРМИРОВАНИЕ ВТОРОГО ГРАФИКА
-ax2.set_title('График 1: {title}'.format(title= symbol), fontsize=10)
+ax2.set_title('График 1: {title}'.format(title= symbol+ ' LOG style'), fontsize=10)
 ax2.plot(klines['Close'], color = 'blue')
-ax2.plot(klines['SMA'], color = sma_color)
-ax2.plot(klines['EMA'], color = ema_color)
-ax2.plot(klines['WMA'], color = wma_color)
+ax2.plot(klines['SMA'],linewidth= 1, color = sma_color, label= 'SMA '+ str(sma_length))
+ax2.plot(klines['EMA'], linewidth= 1, color = ema_color, label= 'EMA '+ str(ema_length))
+ax2.plot(klines['WMA'], linewidth= 1, color = wma_color, label= 'WMA '+ str(wma_length))
+
+# Легенду выводим
+ax2.legend()
 
 # Устанавливаем размер шрифта меток на осях
 ax2.tick_params(axis='y', labelsize=6)
@@ -144,8 +148,10 @@ ax2.grid(True,which="both",ls="--",c='gray')
 #ax2.grid(True)
 
 # =====  ФОРМИРОВАНИЕ ТРЕТЬЕГО ГРАФИКА
-#ax3.plot(klines['EMA_DIFF'], color='orange')
-ax3.plot(klines['EMA_PCT'], color='orange')
+ax3.plot(klines['EMA_DIFF'], color='orange')
+ax3.plot(klines['EMA_PCT']*100, color='red')
+
+#ax3.plot(T, color='blue')
 #ax3.plot(Trend, color='orange')
 #ax2.plot(klines['EMA_DIFF'], color='orange')
 
@@ -158,7 +164,7 @@ ax3.grid(True)
 
 # УСТАНАВЛИВАТЬ ПОСДЕДНИМ !!! По оси Y - логарифмическая шкала
 #ax3.set_yscale('log')
-#ax3.set_yscale('symlog', linthresh=1)
+ax3.set_yscale('symlog', linthresh=1)
 
 # Сетку рисуем
 #ax1.grid(True)
