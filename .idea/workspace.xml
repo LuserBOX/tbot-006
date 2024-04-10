@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="477a8e8e-7f9f-4386-99fe-014d94af1096" name="Changes" comment="04.04.2024 22:0">
-      <change afterPath="$PROJECT_DIR$/Indikators_Test/xMA(Binance)/Price-CANDLE+ema(binance).py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Indikators_Test/xMA(Binance)/ema+ema_diff(binance).py" beforeDir="false" afterPath="$PROJECT_DIR$/Indikators_Test/xMA(Binance)/ema+ema_diff(binance).py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Indikators_Test/xMA(Binance)/sma+ema+wma(binance).py" beforeDir="false" afterPath="$PROJECT_DIR$/Indikators_Test/xMA(Binance)/sma+ema+wma(binance).py" afterDir="false" />
-    </list>
+    <list default="true" id="477a8e8e-7f9f-4386-99fe-014d94af1096" name="Changes" comment="10.04.2024 22:35" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -168,7 +163,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712256980000</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="04.04.2024 22:0">
+      <option name="closed" value="true" />
+      <created>1712777710673</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1712777710674</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
