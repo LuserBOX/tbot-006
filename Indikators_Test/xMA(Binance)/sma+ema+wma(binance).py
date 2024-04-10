@@ -70,27 +70,7 @@ drop_klines, klines = klines, drop_klines
 # Печатаем весь DataFrame
 print('EMA:\n', klines)
 
-# Вариант 1
-# Расчитываем производную от EMA
-Trend = np.diff(klines['EMA'])
-
-T = numpy.gradient(klines['EMA'])
-print('np.Trend:\n', Trend)
-print('np.Trend_1 :\n', T)
-
-
-# Вариант 2. Расчитиваем разницу между соседними значениями прямо в DataFrame
-# ПРАВИЛЬНОЕ РЕШЕНИЕ, Так ак остаются валидными ДАТЫ!!!
-klines.loc[:,['EMA_DIFF']] = klines['EMA'].diff()
-
-# Определяем разницу между значениями в процентах
-klines.loc[:,['EMA_PCT']] = klines['EMA'].pct_change ()
-
-
-
-print('df.EMA_DIFF:\n', klines['EMA_DIFF'])
-
-
+# ============ ГРАФИКА ==============
 # Черная тема
 plt.style.use('dark_background')
 
@@ -99,11 +79,10 @@ fig = plt.figure(figsize = (18, 13))
 
 #fig = plt.figure(dpi = 10)
 
-ax1 = fig.add_subplot(311)
-ax2 = fig.add_subplot(312)
-ax3 = fig.add_subplot(313)
+ax1 = fig.add_subplot(211)
+ax2 = fig.add_subplot(212)
 
-# ====== ФОПМИПУЕМ ПЕПРВЫЙ ГРАФИК
+# ====== ФОРМИПУЕМ ПЕПРВЫЙ ГРАФИК
 ax1.set_title('График 1: {title}'.format(title= symbol+ ' LINE style'), fontsize=10)
 ax1.plot(klines['Close'], color = 'blue')
 ax1.plot(klines['SMA'],linewidth= 1, color = sma_color, label= 'SMA '+ str(sma_length))
@@ -146,29 +125,6 @@ ax2.set_yscale('log')
 # Сетку рисуем
 ax2.grid(True,which="both",ls="--",c='gray')
 #ax2.grid(True)
-
-# =====  ФОРМИРОВАНИЕ ТРЕТЬЕГО ГРАФИКА
-ax3.plot(klines['EMA_DIFF'], color='orange')
-ax3.plot(klines['EMA_PCT']*100, color='red')
-
-#ax3.plot(T, color='blue')
-#ax3.plot(Trend, color='orange')
-#ax2.plot(klines['EMA_DIFF'], color='orange')
-
-# Ели линия выше 0- тренд возрастающий.
-ax3.set_title('График 2: Линия индекса тренда (производная) {title}'.format(title= symbol), fontsize=10)
-# Устанавливаем размер шрифта меток на осях
-ax3.tick_params(axis='y', labelsize=8)
-ax3.tick_params(axis='x', labelsize=8)
-ax3.grid(True)
-
-# УСТАНАВЛИВАТЬ ПОСДЕДНИМ !!! По оси Y - логарифмическая шкала
-#ax3.set_yscale('log')
-ax3.set_yscale('symlog', linthresh=1)
-
-# Сетку рисуем
-#ax1.grid(True)
-ax3.grid(True,which="both",ls="--",c='gray')
 
 plt.show()
 

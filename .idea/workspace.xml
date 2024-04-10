@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="477a8e8e-7f9f-4386-99fe-014d94af1096" name="Changes" comment="03.04.2024 22:34">
+    <list default="true" id="477a8e8e-7f9f-4386-99fe-014d94af1096" name="Changes" comment="04.04.2024 22:0">
+      <change afterPath="$PROJECT_DIR$/Indikators_Test/xMA(Binance)/Price-CANDLE+ema(binance).py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Indikators_Test/xMA(Binance)/sma+ema(binance).py" beforeDir="false" afterPath="$PROJECT_DIR$/Indikators_Test/xMA(Binance)/sma+ema+wma(binance).py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Indikators_Test/xMA(Binance)/ema+ema_diff(binance).py" beforeDir="false" afterPath="$PROJECT_DIR$/Indikators_Test/xMA(Binance)/ema+ema_diff(binance).py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Indikators_Test/xMA(Binance)/sma+ema+wma(binance).py" beforeDir="false" afterPath="$PROJECT_DIR$/Indikators_Test/xMA(Binance)/sma+ema+wma(binance).py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +41,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.Price-CANDLE+ema(binance).executor": "Run",
     "Python.ema(binance).executor": "Run",
+    "Python.ema+ema_diff(binance).executor": "Run",
     "Python.ema200(binance).executor": "Run",
     "Python.sma+ema(binance).executor": "Run",
     "Python.sma+ema+wma(binance).executor": "Run",
@@ -53,7 +57,11 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Indikators_Test/xMA(Binance)" />
+      <recent name="$PROJECT_DIR$/TEST-001" />
       <recent name="$PROJECT_DIR$/Indikators_Test/EMA200(Binance)" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Indikators_Test/xMA(Binance)" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -144,7 +152,23 @@
       <option name="project" value="LOCAL" />
       <updated>1712172908736</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="04.04.2024 22:0">
+      <option name="closed" value="true" />
+      <created>1712256972200</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1712256972200</updated>
+    </task>
+    <task id="LOCAL-00011" summary="04.04.2024 22:0">
+      <option name="closed" value="true" />
+      <created>1712256980000</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1712256980000</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -164,7 +188,8 @@
     <MESSAGE value="31.03.2024 23:55" />
     <MESSAGE value="01.04.2024 22:49" />
     <MESSAGE value="03.04.2024 22:34" />
-    <option name="LAST_COMMIT_MESSAGE" value="03.04.2024 22:34" />
+    <MESSAGE value="04.04.2024 22:0" />
+    <option name="LAST_COMMIT_MESSAGE" value="04.04.2024 22:0" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

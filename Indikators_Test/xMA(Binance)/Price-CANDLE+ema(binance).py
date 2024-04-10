@@ -1,10 +1,14 @@
 # ТЕСТОВЫЙ СКРИПТ.
 # 1. ПОЛУЧЕНИЕ Данных с биржи Бинанс
 # - Через неофициальную библиотеку Pyton Binance и его клиента.
+# https://www.youtube.com/watch?v=hl6p89NqWAM
 # 2. Расчет индикаторов SMA и EMA
 # 3. Отрисовка графиков с индикаторами
+
+
 import numpy
 from binance.client import Client
+import mplfinance as mpf
 import pandas as pd
 import pandas_ta as ta
 import numpy as np
@@ -21,7 +25,7 @@ symbol = 'LTCUSDT'
 interval = '1d'
 grid_y_start = 60
 grid_price_step = 5
-limit = 100
+limit = 900
 
 price_color = 'green'
 ema_length = 10
@@ -43,20 +47,74 @@ def fn_get_binance_klines(symbol, interval, limit):
 
     # Оставляем первые 6 столбцов
     df = df.iloc[:, :6]
+
     # Переименуем столбцы по значению в них
     df.columns = ['Time', 'Open', 'High', 'Low', 'Close', 'Volume']
+
     # В таблице нам не нужен первый столбец- нумерация. Убираем его. Индескируем по столбцу Time
-    df = df.set_index('Time')
+    df = df.set_index('Time').shift(-1)[:-1]
+
     # Переводим столбец Time из Datatime в читаемый вид
     df.index = pd.to_datetime(df.index, unit='ms')
+
     # Изменяем тип данных на float, чтобы можно было вести рассчет алгоритмов
     df = df.astype(float)
+
     return df
 
 # Получаем массив данных с бинанс
 klines = fn_get_binance_klines(symbol = symbol, interval = interval, limit = limit)
+
+# ПЕЧАТЬ ГРАФИКА МЕТОДОМ mplfinance
+
+# ФОРМИРОВАНИЕ СТИЛЯ.
+#  ВАРИАНТ1
+mc = mpf.make_marketcolors(up='blue',down='red',edge='inherit',wick='black',volume='in',ohlc='i')
+s = mpf.make_mpf_style(marketcolors=mc)
+
+# ВАРИАНТ 2- СУПЕР!!!!!
+binance_dark = {
+    "base_mpl_style": "dark_background",
+    "marketcolors": {
+        "candle": {"up": "#3dc985", "down": "#ef4f60"},
+        "edge": {"up": "#3dc985", "down": "#ef4f60"},
+        "wick": {"up": "#3dc985", "down": "#ef4f60"},
+        "ohlc": {"up": "green", "down": "red"},
+        "volume": {"up": "#247252", "down": "#82333f"},
+        "vcedge": {"up": "green", "down": "red"},
+        "vcdopcod": False,
+        "alpha": 1,
+    },
+    "mavcolors": ("#ad7739", "#a63ab2", "#62b8ba"),
+    "facecolor": "#1b1f24",
+    "gridcolor": "#2c2e31",
+    "gridstyle": "--",
+    "y_on_right": True,
+    "rc": {
+        "axes.grid": True,
+        "axes.grid.axis": "y",
+        "axes.edgecolor": "#474d56",
+        "axes.titlecolor": "red",
+        "figure.facecolor": "#161a1e",
+        "figure.titlesize": "x-large",
+        "figure.titleweight": "semibold",
+    },
+    "base_mpf_style": "binance-dark",
+}
+
+mpf.plot(klines, type='line', title=symbol ,  ylabel='Price', volume=True, style=s, mav=[720,200],tight_layout=True ,figratio=(200,100))
+#                                                                                       EMA 50 200
+mpf.plot(klines, type='candle', title=symbol ,  ylabel='Price', volume=True, style=binance_dark, mav=[720,200],tight_layout=True ,figratio=(200,100))
+
 # Вывод результатов запроса от Бинанс
 print('Binance_klines: \n', klines)
+
+
+
+
+
+
+
 # Создаем новые столбцы и добавлячем в него расчитываемые значения EMA
 
 klines['EMA'] = ta.ema(klines['Close'], length = ema_length, offset=None)
