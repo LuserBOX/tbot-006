@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="477a8e8e-7f9f-4386-99fe-014d94af1096" name="Changes" comment="10.04.2024 22:35">
-      <change afterPath="$PROJECT_DIR$/Indikators_Test/MACD/Price-CANDLE+MACD(binance).py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Indikators_Test/MACD/__init__.py" afterDir="false" />
+    <list default="true" id="477a8e8e-7f9f-4386-99fe-014d94af1096" name="Changes" comment="11.04.2024 22:10">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Indikators_Test/xMA(Binance)/Price-CANDLE+ema(binance).py" beforeDir="false" afterPath="$PROJECT_DIR$/Indikators_Test/xMA(Binance)/Price-CANDLE+ema(binance).py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Indikators_Test/MACD/Price-CANDLE+MACD(binance).py" beforeDir="false" afterPath="$PROJECT_DIR$/Indikators_Test/MACD/Price-CANDLE+MACD(binance).py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,7 +184,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712778368952</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="11.04.2024 22:10">
+      <option name="closed" value="true" />
+      <created>1712862627686</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1712862627686</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -208,7 +214,8 @@
     <MESSAGE value="03.04.2024 22:34" />
     <MESSAGE value="04.04.2024 22:0" />
     <MESSAGE value="10.04.2024 22:35" />
-    <option name="LAST_COMMIT_MESSAGE" value="10.04.2024 22:35" />
+    <MESSAGE value="11.04.2024 22:10" />
+    <option name="LAST_COMMIT_MESSAGE" value="11.04.2024 22:10" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -122,7 +122,44 @@ macd_plot = mpf.make_addplot(macd["MACD_12_26_9"], panel=1, color='fuchsia', tit
 macd_hist_plot = mpf.make_addplot(macd["MACDh_12_26_9"], type='bar', panel=1, color='g') # color='dimgray'
 macd_signal_plot = mpf.make_addplot(macd["MACDs_12_26_9"], panel=1, color='b')
 
+macd_plot = mpf.make_addplot(macd["MACD_12_26_9"], panel=1, color='fuchsia', title="MACD")
+macd_hist_plot = mpf.make_addplot(macd["MACDh_12_26_9"], type='bar', panel=1, color='g')
+macd_signal_plot = mpf.make_addplot(macd["MACDs_12_26_9"], panel=1, color='b')
+
 plots = [macd_plot, macd_signal_plot, macd_hist_plot]
 
 
 mpf.plot(klines, type='candle', style=binance_dark, addplot=plots)
+# ==================================================================
+# Печать двух графиков с установкой разных сеток
+fig = plt.figure(figsize = (12, 6))
+
+ax = fig.add_subplot(211)
+ax2 = fig.add_subplot(212)
+
+ax.set_title('График 1: {}'.format('XXX/USDT+EMA'), fontsize=10)
+ax.plot(klines['Close'], color = 'blue')
+
+ax.grid(True)
+# Enabling both grids:
+
+# Устанавливаем размер шрифта меток на осях
+ax.tick_params(axis='y', labelsize=6)
+ax.tick_params(axis='x', labelsize=6)
+
+ax.set_yticks(np.arange(0, max(klines['Close']), 25))
+
+# Формирование второго графика
+
+#ax2.plot(klines['EMA_DIFF'], color='orange')
+ax2.plot(klines['MACD_12_26_9'], color='r', label='MACD')
+ax2.plot(klines['MACDh_12_26_9'], color='g', label='MACDh')
+ax2.plot(klines['MACDs_12_26_9'], color='w', label='MACDs')
+ax2.set_title('График 2: {}'.format('BNB/USDT+Производная(Разница соседних значений EMA)'), fontsize=10)
+# Устанавливаем размер шрифта меток на осях
+ax2.tick_params(axis='y', labelsize=8)
+ax2.tick_params(axis='x', labelsize=8)
+ax2.grid(True)
+
+
+plt.show()
