@@ -30,8 +30,42 @@ limit = 900
 price_color = 'green'
 ema_length = 10
 ema_color = 'red'
-
-
+# ==================== ФОРМИРОВАНИЕ СТИЛЯ ВЫВОДА ГРАФИКА ==============
+# ВАРИАНТ- СУПЕР!!!!!
+binance_dark = {
+    "base_mpl_style": "dark_background",
+    "marketcolors": {
+        "candle": {"up": "#3dc985", "down": "#ef4f60"},
+        "edge": {"up": "#3dc985", "down": "#ef4f60"},
+        "wick": {"up": "#3dc985", "down": "#ef4f60"},
+        "ohlc": {"up": "green", "down": "red"},
+        "volume": {"up": "#247252", "down": "#82333f"},
+        "vcedge": {"up": "green", "down": "red"},
+        "vcdopcod": False,
+        "alpha": 1,
+    },
+    "mavcolors": ("#ad7739", "#a63ab2", "#62b8ba"),
+    "facecolor": "#1b1f24",
+    "gridcolor": "#2c2e31",
+    "gridstyle": "--",
+    "y_on_right": True,
+    "rc": {
+        "axes.grid": True,
+        "axes.grid.axis": "y",
+        "axes.edgecolor": "#474d56",
+        "axes.titlecolor": "red",
+        "figure.facecolor": "#161a1e",
+        "figure.titlesize": "x-large",
+        "figure.titleweight": "semibold",
+    },
+    "base_mpf_style": "binance-dark",
+}
+#
+# ФОРМИРОВАНИЕ ОБЫЧНОГО СТИЛЯ.
+#  ВАРИАНТ1
+mc = mpf.make_marketcolors(up='blue',down='red',edge='inherit',wick='black',volume='in',ohlc='i')
+s = mpf.make_mpf_style(marketcolors=mc)
+# ==================================================================
 # ПОДКЛЮЧЕНИЕ К БИНАНСУ
 client = Client(api_key=keys.api_key, api_secret=keys.api_secret)
 
@@ -65,49 +99,30 @@ def fn_get_binance_klines(symbol, interval, limit):
 # Получаем массив данных с бинанс
 klines = fn_get_binance_klines(symbol = symbol, interval = interval, limit = limit)
 
-# ПЕЧАТЬ ГРАФИКА МЕТОДОМ mplfinance
-
-# ФОРМИРОВАНИЕ СТИЛЯ.
-#  ВАРИАНТ1
-mc = mpf.make_marketcolors(up='blue',down='red',edge='inherit',wick='black',volume='in',ohlc='i')
-s = mpf.make_mpf_style(marketcolors=mc)
-
-# ВАРИАНТ 2- СУПЕР!!!!!
-binance_dark = {
-    "base_mpl_style": "dark_background",
-    "marketcolors": {
-        "candle": {"up": "#3dc985", "down": "#ef4f60"},
-        "edge": {"up": "#3dc985", "down": "#ef4f60"},
-        "wick": {"up": "#3dc985", "down": "#ef4f60"},
-        "ohlc": {"up": "green", "down": "red"},
-        "volume": {"up": "#247252", "down": "#82333f"},
-        "vcedge": {"up": "green", "down": "red"},
-        "vcdopcod": False,
-        "alpha": 1,
-    },
-    "mavcolors": ("#ad7739", "#a63ab2", "#62b8ba"),
-    "facecolor": "#1b1f24",
-    "gridcolor": "#2c2e31",
-    "gridstyle": "--",
-    "y_on_right": True,
-    "rc": {
-        "axes.grid": True,
-        "axes.grid.axis": "y",
-        "axes.edgecolor": "#474d56",
-        "axes.titlecolor": "red",
-        "figure.facecolor": "#161a1e",
-        "figure.titlesize": "x-large",
-        "figure.titleweight": "semibold",
-    },
-    "base_mpf_style": "binance-dark",
-}
-
 # Вывод результатов запроса от Бинанс
 print('Binance_klines: \n', klines)
 
+# РАСЧЕТ MACD
+#klines["macd"], klines["macd_signal"], klines["macd_hist"] = ta.macd(klines['Close'])
+macd = klines.ta.macd(close='Close', fast=12, slow=26, signal=9, append=True)
+
+print(macd)
+
+# ПЕЧАТЬ ГРАФИКА МЕТОДОМ mplfinance
+
+# Вариант простого оформления
 mpf.plot(klines, type='line', title=symbol ,  ylabel='Price', volume=True, style=s, mav=[720,200],tight_layout=True ,figratio=(200,100))
-#                                                                                       EMA 50 200
+# Вариант стиля под Binance                                                                       EMA 720 200
 mpf.plot(klines, type='candle', title=symbol ,  ylabel='Price', volume=True, style=binance_dark, mav=[720,200],tight_layout=True ,figratio=(200,100))
 
+# Формирование графика с MACD
+# macd panel
+#colors = ['g' if v >= 0 else 'r' for v in klines["macd_hist"]]
+macd_plot = mpf.make_addplot(macd["MACD_12_26_9"], panel=1, color='fuchsia', title="MACD")
+macd_hist_plot = mpf.make_addplot(macd["MACDh_12_26_9"], type='bar', panel=1, color='g') # color='dimgray'
+macd_signal_plot = mpf.make_addplot(macd["MACDs_12_26_9"], panel=1, color='b')
+
+plots = [macd_plot, macd_signal_plot, macd_hist_plot]
 
 
+mpf.plot(klines, type='candle', style=binance_dark, addplot=plots)

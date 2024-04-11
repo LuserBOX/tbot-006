@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="477a8e8e-7f9f-4386-99fe-014d94af1096" name="Changes" comment="10.04.2024 22:35" />
+    <list default="true" id="477a8e8e-7f9f-4386-99fe-014d94af1096" name="Changes" comment="10.04.2024 22:35">
+      <change afterPath="$PROJECT_DIR$/Indikators_Test/MACD/Price-CANDLE+MACD(binance).py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Indikators_Test/MACD/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Indikators_Test/xMA(Binance)/Price-CANDLE+ema(binance).py" beforeDir="false" afterPath="$PROJECT_DIR$/Indikators_Test/xMA(Binance)/Price-CANDLE+ema(binance).py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,6 +41,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.Price-CANDLE+MACD(binance).executor": "Run",
     "Python.Price-CANDLE+ema(binance).executor": "Run",
     "Python.ema(binance).executor": "Run",
     "Python.ema+ema_diff(binance).executor": "Run",
@@ -45,12 +51,13 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "/home/stalker/PycharmProjects/tbot-006/Indikators_Test/xMA(Binance)",
+    "last_opened_file_path": "/home/stalker/PycharmProjects/tbot-006/Indikators_Test/MACD",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Indikators_Test/MACD" />
       <recent name="$PROJECT_DIR$/Indikators_Test/xMA(Binance)" />
       <recent name="$PROJECT_DIR$/TEST-001" />
       <recent name="$PROJECT_DIR$/Indikators_Test/EMA200(Binance)" />
@@ -171,7 +178,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712777710674</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="10.04.2024 22:35">
+      <option name="closed" value="true" />
+      <created>1712778368952</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1712778368952</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -192,7 +207,8 @@
     <MESSAGE value="01.04.2024 22:49" />
     <MESSAGE value="03.04.2024 22:34" />
     <MESSAGE value="04.04.2024 22:0" />
-    <option name="LAST_COMMIT_MESSAGE" value="04.04.2024 22:0" />
+    <MESSAGE value="10.04.2024 22:35" />
+    <option name="LAST_COMMIT_MESSAGE" value="10.04.2024 22:35" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
