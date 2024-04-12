@@ -25,7 +25,7 @@ symbol = 'LTCUSDT'
 interval = '1d'
 grid_y_start = 60
 grid_price_step = 5
-limit = 900
+limit = 400
 
 price_color = 'green'
 ema_length = 10
@@ -106,6 +106,13 @@ print('Binance_klines: \n', klines)
 #klines["macd"], klines["macd_signal"], klines["macd_hist"] = ta.macd(klines['Close'])
 macd = klines.ta.macd(close='Close', fast=12, slow=26, signal=9, append=True)
 
+
+k = ta.ema(klines['Close'], length=12, offset=None)
+d = ta.ema(klines['Close'], length=26, offset=None)
+klines['macd'] = k - d
+klines['macd_s'] = ta.ema(klines['macd'], length=9, offset=None)
+klines['macd_h'] = klines['macd'] - klines['macd_s']
+
 print(macd)
 
 # ПЕЧАТЬ ГРАФИКА МЕТОДОМ mplfinance
@@ -118,16 +125,15 @@ mpf.plot(klines, type='candle', title=symbol ,  ylabel='Price', volume=True, sty
 # Формирование графика с MACD
 # macd panel
 #colors = ['g' if v >= 0 else 'r' for v in klines["macd_hist"]]
-macd_plot = mpf.make_addplot(macd["MACD_12_26_9"], panel=1, color='fuchsia', title="MACD")
-macd_hist_plot = mpf.make_addplot(macd["MACDh_12_26_9"], type='bar', panel=1, color='g') # color='dimgray'
-macd_signal_plot = mpf.make_addplot(macd["MACDs_12_26_9"], panel=1, color='b')
+#macd_plot = mpf.make_addplot(macd["MACD_12_26_9"], panel=1, color='fuchsia', title="MACD")
+#macd_hist_plot = mpf.make_addplot(macd["MACDh_12_26_9"], type='bar', panel=1, color='g') # color='dimgray'
+#macd_signal_plot = mpf.make_addplot(macd["MACDs_12_26_9"], panel=1, color='b')
 
-macd_plot = mpf.make_addplot(macd["MACD_12_26_9"], panel=1, color='fuchsia', title="MACD")
-macd_hist_plot = mpf.make_addplot(macd["MACDh_12_26_9"], type='bar', panel=1, color='g')
-macd_signal_plot = mpf.make_addplot(macd["MACDs_12_26_9"], panel=1, color='b')
+macd_plot = mpf.make_addplot(klines['macd'], panel=1, color='fuchsia', title="MACD")
+macd_hist_plot = mpf.make_addplot(klines['macd_h'], type='bar', panel=1, color='g')
+macd_signal_plot = mpf.make_addplot(klines['macd_s'], panel=1, color='b')
 
 plots = [macd_plot, macd_signal_plot, macd_hist_plot]
-
 
 mpf.plot(klines, type='candle', style=binance_dark, addplot=plots)
 # ==================================================================
